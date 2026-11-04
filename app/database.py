@@ -1,8 +1,12 @@
 """Слой работы с базой данных SQLite для планировщика проектов."""
+import os
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent / "data" / "planner.db"
+# Путь к данным можно переопределить переменной окружения PLANNER_DATA_DIR
+# (в Docker-контейнере volume монтируется в /data)
+DATA_DIR = Path(os.environ.get("PLANNER_DATA_DIR", Path(__file__).parent / "data"))
+DB_PATH = DATA_DIR / "planner.db"
 
 
 def get_conn():

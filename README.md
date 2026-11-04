@@ -26,11 +26,26 @@ app/
   data/            — planner.db и uploads/ (создаются автоматически, в .gitignore)
 ```
 
-## Запуск
+## Запуск локально
 ```bash
 pip install -r requirements.txt
 python app/main.py        # откройте http://localhost:5000
 ```
+
+## Запуск в Docker
+Через docker-compose (рекомендуется — данные сохраняются в volume `planner-data`):
+```bash
+docker compose up -d --build     # собрать и запустить
+docker compose logs -f           # посмотреть логи
+docker compose down              # остановить (данные останутся в volume)
+```
+
+Или просто docker:
+```bash
+docker build -t planner .
+docker run -d -p 5000:5000 -v planner-data:/app/app/data --name planner planner
+```
+Приложение будет доступно на http://localhost:5000.
 
 ## API
 | Метод | Путь | Действие |

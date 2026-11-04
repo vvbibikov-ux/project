@@ -8,9 +8,9 @@ from pathlib import Path
 from flask import Flask, jsonify, render_template, request, send_from_directory, abort
 
 import analyzer
-from database import get_conn, init_db, rows_to_list
+from database import DATA_DIR, get_conn, init_db, rows_to_list
 
-UPLOAD_DIR = Path(__file__).parent / "data" / "uploads"
+UPLOAD_DIR = DATA_DIR / "uploads"
 app = Flask(__name__)
 init_db()
 

@@ -1,0 +1,20 @@
+# Запуск из корня проекта:  docker compose up -d --build
+# Если имя файла не распознаётся — запустите с флагом:  docker compose -f docker-compose.yml up -d --build
+# (альтернативное общепринятое имя без дефиса: compose.yaml)
+services:
+  planner:
+    build: .
+    image: project-planner:latest
+    container_name: project-planner
+    ports:
+      - "5000:5000"
+    environment:
+      # папка для БД и загруженных файлов внутри контейнера
+      - PLANNER_DATA_DIR=/data
+    volumes:
+      # данные (БД + загруженные файлы) сохраняются между перезапусками
+      - planner-data:/data
+    restart: unless-stopped
+
+volumes:
+  planner-data:
