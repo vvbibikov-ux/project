@@ -4,9 +4,12 @@ services:
     container_name: project-planner
     ports:
       - "5000:5000"
+    environment:
+      # папка для БД и загруженных файлов внутри контейнера
+      - PLANNER_DATA_DIR=/data
     volumes:
       # данные (БД + загруженные файлы) сохраняются между перезапусками
-      - planner-data:/app/app/data
+      - planner-data:/data
     restart: unless-stopped
 
 volumes:
