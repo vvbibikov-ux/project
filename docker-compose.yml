@@ -1,0 +1,13 @@
+services:
+  planner:
+    build: .
+    container_name: project-planner
+    ports:
+      - "5000:5000"
+    volumes:
+      # данные (БД + загруженные файлы) сохраняются между перезапусками
+      - planner-data:/app/app/data
+    restart: unless-stopped
+
+volumes:
+  planner-data:
