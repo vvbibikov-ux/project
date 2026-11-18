@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Планировщик проектов</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>🗂 Планировщик проектов</h1>
+  <nav>
+    <button id="tabProjects" class="tab active">Проекты</button>
+    <button id="tabAnalyzer" class="tab">📊 Анализатор</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ===== Проекты ===== -->
+  <section id="viewProjects">
+    <div class="card">
+      <h2>Новый проект</h2>
+      <div class="row">
+        <input id="pName" placeholder="Название проекта">
+        <input id="pDesc" placeholder="Описание (необязательно)">
+        <button class="btn primary" onclick="createProject()">Создать</button>
+      </div>
+    </div>
+    <div id="projectList"></div>
+  </section>
+
+  <!-- ===== Анализатор ===== -->
+  <section id="viewAnalyzer" style="display:none">
+    <div class="card">
+      <h2>Анализ проектов</h2>
+      <button class="btn primary" onclick="runAnalysis()">Запустить анализ</button>
+      <div id="analysisResult"></div>
+    </div>
+  </section>
+</main>
+
+<!-- Модальное окно: новая задача -->
+<dialog id="taskDialog">
+  <h3 id="tdTitle">Новая задача</h3>
+  <input type="hidden" id="tdId">
+  <label>Название<input id="tdName" required></label>
+  <label>Описание<textarea id="tdDesc" rows="2"></textarea></label>
+  <label>Приоритет
+    <select id="tdPriority"><option value="low">Низкий</option><option value="medium" selected>Средний</option><option value="high">Высокий</option></select>
+  </label>
+  <label>Напоминание (дата и время)<input type="datetime-local" id="tdDue"></label>
+  <div class="row end">
+    <button class="btn" onclick="closeTaskDialog()">Отмена</button>
+    <button class="btn primary" onclick="saveTask()">Сохранить</button>
+  </div>
+</dialog>
+
+<div id="toast"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
